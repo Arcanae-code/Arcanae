@@ -42,9 +42,9 @@
       "logo": "logo-tempest.png", "lightCrest": true,
       "players": [
         { "id": "p9",  "pseudo": "Pcou",        "role": "Tank",         "heroes": "", "captain": false },
-        { "id": "p10", "pseudo": "Hirosai",     "role": "Hitscan",      "heroes": "", "captain": true },
+        { "id": "p10", "pseudo": "Hirosai",     "role": "Hitscan",      "heroes": "", "captain": false },
         { "id": "p11", "pseudo": "MeChalo_",    "role": "Flex DPS",     "heroes": "", "captain": false },
-        { "id": "p12", "pseudo": "Aspin",       "role": "Main Support", "heroes": "", "captain": false },
+        { "id": "p12", "pseudo": "Aspin",       "role": "Main Support", "heroes": "", "captain": true },
         { "id": "p13", "pseudo": "Ketsueki21",  "role": "En essai",     "heroes": "", "captain": false }
       ]
     }
