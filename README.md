@@ -14,10 +14,10 @@ Site statique : aucun serveur, aucune base de données, aucune dépendance à in
 
 ## Mettre en ligne (GitHub Pages)
 
-1. Créer un dépôt **public** nommé `arcanae`.
+1. Créer un dépôt **public** nommé `Arcanae`.
 2. *Add file → Upload files*, déposer les trois fichiers, *Commit changes*.
 3. *Settings → Pages → Source: Deploy from a branch → Branch: `main` / `/ (root)` → Save*.
-4. Au bout d'une minute, le site est sur `https://<utilisateur>.github.io/arcanae/`.
+4. Au bout d'une minute, le site est sur `https://<utilisateur>.github.io/Arcanae/`.
 
 ## Modifier les rosters
 
