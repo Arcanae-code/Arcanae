@@ -15,7 +15,7 @@
   "teams": [
     {
       "id": "lunaris", "name": "Lunaris", "color": "#9B6BF0", "colorLabel": "violet",
-      "logo": "", "lightCrest": true, "players": []
+      "logo-lunaris.png": "", "lightCrest": true, "players": []
     },
     {
       "id": "solaris", "name": "Solaris", "color": "#E85252", "colorLabel": "rouge",
