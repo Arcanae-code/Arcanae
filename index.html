@@ -66,7 +66,7 @@ img{max-width:100%;display:block}
 .trow::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);opacity:.85}
 .trow .thumb{width:56px;height:56px;flex:0 0 56px;border:1px solid var(--hair);display:grid;place-items:center;overflow:hidden;background:rgba(0,0,0,.2)}
 .trow .thumb.light{background:var(--plaque);border-color:rgba(0,0,0,.1)}
-.trow .thumb img{width:100%;height:100%;object-fit:contain;padding:8px}
+.trow .thumb img{width:100%;height:100%;object-fit:contain;padding:5px}
 .trow .thumb.empty{border-style:dashed;background:rgba(0,0,0,.2);font-family:var(--sans);font-size:9.5px;letter-spacing:.05em;color:var(--faint);text-align:center;line-height:1.3}
 .trow .nm{flex:1 1 auto;min-width:0}
 .trow .genus{font-size:15px;color:var(--dim);letter-spacing:.14em;display:block;line-height:1.2}
@@ -76,9 +76,9 @@ img{max-width:100%;display:block}
 .trow:hover{background:linear-gradient(90deg,rgba(255,255,255,.035),transparent 70%)}
 
 .theader{display:flex;gap:28px;align-items:flex-start;padding:44px 0 32px;flex-wrap:wrap}
-.crest{width:136px;height:136px;flex:0 0 136px;border:1px solid var(--hair);display:grid;place-items:center;overflow:hidden;background:rgba(0,0,0,.22)}
+.crest{width:168px;height:168px;flex:0 0 168px;border:1px solid var(--hair);display:grid;place-items:center;overflow:hidden;background:rgba(0,0,0,.22)}
 .crest.light{background:var(--plaque);border-color:rgba(0,0,0,.14)}
-.crest img{width:100%;height:100%;object-fit:contain;padding:17px}
+.crest img{width:100%;height:100%;object-fit:contain;padding:10px}
 .crest.empty{border-style:dashed;background:rgba(0,0,0,.22);font-family:var(--sans);font-size:11px;letter-spacing:.05em;color:var(--faint);text-align:center;line-height:1.4;padding:0 10px}
 .theader .naming{flex:1 1 260px;min-width:0}
 .theader .genus{font-size:19px;color:var(--dim);letter-spacing:.16em;margin:0}
@@ -167,7 +167,7 @@ footer .sig{font-family:var(--sans);font-size:11.5px;letter-spacing:.1em;color:v
 }
 @media (max-width:560px){
   body{font-size:17px}.page{padding:0 20px}
-  .crest{width:100px;height:100px;flex:0 0 100px}
+  .crest{width:124px;height:124px;flex:0 0 124px}
   .theader{gap:20px;padding:30px 0 24px}
   .section{padding:46px 0}
   .erow.link,.erow.staff{grid-template-columns:1fr 34px}
@@ -244,6 +244,9 @@ function tint(hex){
   var n = parseInt(m[1],16), r=(n>>16)&255, g=(n>>8)&255, b=n&255, k=0.90;
   return "rgb("+Math.round(r+(255-r)*k)+","+Math.round(g+(255-g)*k)+","+Math.round(b+(255-b)*k)+")";
 }
+function crestBg(t){ return t.crestBg || (t.lightCrest ? tint(t.color) : ""); }
+function crestCls(t){ return (t.crestBg || t.lightCrest) ? " light" : ""; }
+function crestSty(t){ var b = crestBg(t); return b ? ' style="background:'+b+'"' : ''; }
 function slug(s){
   return String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
     .replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") || ("equipe-"+uid());
@@ -266,6 +269,7 @@ function normalise(d){
       colorLabel: t.colorLabel || "",
       logo: t.logo || "",
       lightCrest: t.lightCrest !== false,
+      crestBg: t.crestBg || "",
       players: (Array.isArray(t.players)?t.players:[]).map(function(p){
         return {id:p.id||uid(), pseudo:p.pseudo||"", role:p.role||"Tank",
                 heroes:p.heroes||"", captain:!!p.captain};
@@ -360,7 +364,7 @@ function homeHTML(){
   var rows = state.teams.map(function(t){
     var n = t.players.length;
     var thumb = t.logo
-      ? '<span class="thumb'+(t.lightCrest?" light":"")+'"'+(t.lightCrest?' style="background:'+tint(t.color)+'"':'')+'><img src="'+esc(t.logo)+'" alt=""></span>'
+      ? '<span class="thumb'+crestCls(t)+'"'+crestSty(t)+'><img src="'+esc(t.logo)+'" alt=""></span>'
       : '<span class="thumb empty">logo<br>à venir</span>';
     return '<a class="trow" href="'+href(t.id)+'" style="--accent:'+esc(t.color)+'">'+thumb+
       '<span class="nm"><span class="genus">Arcana</span>'+
@@ -446,7 +450,7 @@ function teamHTML(id){
                 '<a class="back" href="'+href("accueil")+'">Retour à la Arcanae</a></section>';
 
   var crest = t.logo
-    ? '<div class="crest'+(t.lightCrest?" light":"")+'"'+(t.lightCrest?' style="background:'+tint(t.color)+'"':'')+'><img src="'+esc(t.logo)+'" alt="Logo '+esc(t.name)+'"></div>'
+    ? '<div class="crest'+crestCls(t)+'"'+crestSty(t)+'><img src="'+esc(t.logo)+'" alt="Logo '+esc(t.name)+'"></div>'
     : '<div class="crest empty">Logo<br>à venir</div>';
 
   var roster;
@@ -457,6 +461,8 @@ function teamHTML(id){
         '<label>Logo <input type="file" accept="image/*" data-logo="'+t.id+'"></label>'+
         (t.logo?'<button class="btn" data-dellogo="'+t.id+'">Retirer le logo</button>':'')+
         '<label><input type="checkbox" data-light="'+t.id+'"'+(t.lightCrest?" checked":"")+'> Fond clair derrière le logo</label>'+
+        '<label>Teinte du cadre <input type="color" data-crestbg="'+t.id+'" value="'+esc(crestBg(t)||"#EDEFF6")+'"></label>'+
+        (t.crestBg?'<button class="btn" data-clearbg="'+t.id+'">Teinte auto</button>':'')+
       '</div></div>';
   }else if(t.players.length === 0){
     roster = '<div class="roster"><p class="empty-note">Effectif à compléter.</p></div>';
@@ -538,7 +544,9 @@ function wire(here){
     var lk = t.getAttribute("data-logo");
     if(lk && t.files && t.files[0]){ readLogo(lk, t.files[0]); return; }
     var li = t.getAttribute("data-light");
-    if(li){ var tm = teamById(li); if(tm){ tm.lightCrest = t.checked; saveDraft(); render(); } }
+    if(li){ var tm = teamById(li); if(tm){ tm.lightCrest = t.checked; saveDraft(); render(); } return; }
+    var cb = t.getAttribute("data-crestbg");
+    if(cb){ var tc = teamById(cb); if(tc){ tc.crestBg = t.value; saveDraft(); render(); } }
   });
 
   view.addEventListener("click", function(e){
@@ -572,6 +580,9 @@ function wire(here){
     }
     if((v = b.getAttribute("data-dellogo"))){
       teamById(v).logo = ""; saveDraft(); render(); return;
+    }
+    if((v = b.getAttribute("data-clearbg"))){
+      teamById(v).crestBg = ""; saveDraft(); render(); return;
     }
 
     /* suppressions : deux clics */
