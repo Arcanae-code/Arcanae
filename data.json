@@ -1,0 +1,16 @@
+{
+  "org": {
+    "ceo": "Nexola",
+    "coceo": "Hirosai",
+    "tiktok": "",
+    "instagram": "",
+    "twitch": "",
+    "discord": ""
+  },
+  "teams": {
+    "lunaris":   { "logo": "", "players": [] },
+    "solaris":   { "logo": "", "players": [] },
+    "stellaris": { "logo": "", "players": [] },
+    "tempest":   { "logo": "", "players": [] }
+  }
+}
