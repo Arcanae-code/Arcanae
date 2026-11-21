@@ -107,8 +107,8 @@
         },
         {
           "id": "p12", "pseudo": "Aspin", "role": "Main Support",
-          "main": "lucio", "heroes": "Lúcio", "captain": true,
-          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
+          "main": "mizuki", "heroes": "Mizuki", "captain": true,
+          "links": { "twitch": "https://www.twitch.tv/aspinow", "discord": "@aspinow", "instagram": "", "tiktok": "", "x": "https://x.com/_Aspin__", "youtube": "https://www.youtube.com/@AspinOW" }
         },
         {
           "id": "p13", "pseudo": "Ketsueki21", "role": "En essai",
@@ -122,7 +122,7 @@
         },
         {
           "id": "p18", "pseudo": "Kanameh", "role": "Coach",
-          "main": "mizuki", "heroes": "Mizuki", "captain": false,
+          "main": "lucio", "heroes": "Lúcio", "captain": false,
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
