@@ -1,7 +1,7 @@
 {
   "org": {
     "tagline": "Structure Overwatch. Quatre équipes, quatre couleurs, un même papillon.",
-    "heroesDir": "heroes/",
+    "heroesDir": "",
     "staff": [
       { "id": "s1", "name": "Nexola",   "title": "CEO" },
       { "id": "s2", "name": "Hirosai",  "title": "co-CEO" }

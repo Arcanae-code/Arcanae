@@ -212,21 +212,60 @@ footer .sig{font-family:var(--sans);font-size:11.5px;letter-spacing:.1em;color:v
 </div></div>
 
 <datalist id="heroes-ow">
-  <option value="Ana"></option><option value="Ashe"></option><option value="Baptiste"></option>
-  <option value="Bastion"></option><option value="Brigitte"></option><option value="Cassidy"></option>
-  <option value="D.Va"></option><option value="Doomfist"></option><option value="Echo"></option>
-  <option value="Freja"></option><option value="Genji"></option><option value="Hanzo"></option>
-  <option value="Hazard"></option><option value="Illari"></option><option value="Junker Queen"></option>
-  <option value="Junkrat"></option><option value="Juno"></option><option value="Kiriko"></option>
-  <option value="Lifeweaver"></option><option value="Lúcio"></option><option value="Mauga"></option>
-  <option value="Mei"></option><option value="Mercy"></option><option value="Moira"></option>
-  <option value="Orisa"></option><option value="Pharah"></option><option value="Ramattra"></option>
-  <option value="Reaper"></option><option value="Reinhardt"></option><option value="Roadhog"></option>
-  <option value="Sigma"></option><option value="Sojourn"></option><option value="Soldat : 76"></option>
-  <option value="Sombra"></option><option value="Symmetra"></option><option value="Torbjörn"></option>
-  <option value="Tracer"></option><option value="Venture"></option><option value="Widowmaker"></option>
-  <option value="Winston"></option><option value="Wrecking Ball"></option><option value="Zarya"></option>
-  <option value="Zenyatta"></option>
+  <option value="ana"></option>
+  <option value="ange"></option>
+  <option value="anran"></option>
+  <option value="ash"></option>
+  <option value="baptiste"></option>
+  <option value="bastion"></option>
+  <option value="bouldozer"></option>
+  <option value="brigitte"></option>
+  <option value="cassidy"></option>
+  <option value="chacal"></option>
+  <option value="chopper"></option>
+  <option value="danger"></option>
+  <option value="dmon"></option>
+  <option value="doctrine"></option>
+  <option value="domina"></option>
+  <option value="doomfist"></option>
+  <option value="dva"></option>
+  <option value="echo"></option>
+  <option value="emre"></option>
+  <option value="fatale"></option>
+  <option value="faucheur"></option>
+  <option value="freja"></option>
+  <option value="genji"></option>
+  <option value="hanzo"></option>
+  <option value="illari"></option>
+  <option value="jetpackcat"></option>
+  <option value="juno"></option>
+  <option value="kiriko"></option>
+  <option value="lucio"></option>
+  <option value="mauga"></option>
+  <option value="mei"></option>
+  <option value="mizuki"></option>
+  <option value="moira"></option>
+  <option value="orisa"></option>
+  <option value="pharah"></option>
+  <option value="ramattra"></option>
+  <option value="reinedesjunkers"></option>
+  <option value="reinhardt"></option>
+  <option value="shion"></option>
+  <option value="sierra"></option>
+  <option value="sigma"></option>
+  <option value="sojourn"></option>
+  <option value="soldat76"></option>
+  <option value="sombra"></option>
+  <option value="symmetra"></option>
+  <option value="torbjorn"></option>
+  <option value="tracer"></option>
+  <option value="vendetta"></option>
+  <option value="venture"></option>
+  <option value="vital"></option>
+  <option value="winston"></option>
+  <option value="wuyang"></option>
+  <option value="zarya"></option>
+  <option value="zenyatta"></option>
 </datalist>
 
 <script type="application/json" id="seed">{"org":{"tagline":"Structure Overwatch. Quatre équipes, quatre couleurs, un même papillon.","staff":[{"id":"s1","name":"Nexola","title":"CEO"},{"id":"s2","name":"Hirosai","title":"co-CEO"}],"links":[{"id":"l1","platform":"tiktok","label":"TikTok","url":""},{"id":"l2","platform":"instagram","label":"Instagram","url":"https://www.instagram.com/arcanae.ow/"},{"id":"l3","platform":"twitch","label":"Twitch","url":"https://www.twitch.tv/nexola_arcn"},{"id":"l4","platform":"discord","label":"Discord","url":"https://discord.gg/d3YckVhFsU"}]},"teams":[{"id":"lunaris","name":"Lunaris","color":"#9B6BF0","colorLabel":"violet","logo":"logo-lunaris.png","lightCrest":true,"players":[]},{"id":"solaris","name":"Solaris","color":"#E85252","colorLabel":"rouge","logo":"","lightCrest":true,"players":[{"id":"p1","pseudo":"Achpoi","role":"Tank","heroes":"","captain":false},{"id":"p2","pseudo":"Ensteurgaming","role":"Hitscan","heroes":"","captain":false},{"id":"p3","pseudo":"Lelazer","role":"Flex DPS","heroes":"","captain":false}]},{"id":"stellaris","name":"Stellaris","color":"#F3C544","colorLabel":"jaune","logo":"","lightCrest":true,"players":[{"id":"p4","pseudo":"Aphi","role":"Tank","heroes":"","captain":false},{"id":"p5","pseudo":"Synki","role":"Hitscan","heroes":"","captain":true},{"id":"p6","pseudo":"Roka","role":"Flex DPS","heroes":"","captain":false},{"id":"p7","pseudo":"Franui","role":"Main Support","heroes":"","captain":false},{"id":"p8","pseudo":"Lucifae","role":"Flex Support","heroes":"","captain":false}]},{"id":"tempest","name":"Tempest","color":"#CFE6FF","colorLabel":"bleu glacé","logo":"logo-tempest.png","lightCrest":true,"players":[{"id":"p9","pseudo":"Pcou","role":"Tank","heroes":"","captain":false},{"id":"p10","pseudo":"Hirosai","role":"Hitscan","heroes":"","captain":false},{"id":"p11","pseudo":"MeChalo_","role":"Flex DPS","heroes":"","captain":false},{"id":"p12","pseudo":"Aspin","role":"Main Support","heroes":"","captain":true},{"id":"p13","pseudo":"Ketsueki21","role":"En essai","heroes":"","captain":false}]}]}</script>
@@ -246,7 +285,7 @@ var PLATFORMS = ["tiktok","instagram","twitch","discord","youtube","x","site"];
 var LSKEY = "arcanae-brouillon";
 var PALETTE = ["#9B6BF0","#E85252","#F3C544","#CFE6FF","#5BD6A8","#F08BC8","#7FB4F5"];
 
-var FALLBACK = {org:{tagline:"",heroesDir:"heroes/",staff:[],links:[]}, teams:[]};
+var FALLBACK = {org:{tagline:"",heroesDir:"",staff:[],links:[]}, teams:[]};
 try{
   var seedEl = document.getElementById("seed");
   if(seedEl) FALLBACK = JSON.parse(seedEl.textContent);
@@ -290,7 +329,7 @@ function normalise(d){
   if(!d || typeof d !== "object") return out;
   var o = d.org || {};
   out.org.tagline = o.tagline || "";
-  out.org.heroesDir = (o.heroesDir === undefined) ? "heroes/" : (o.heroesDir || "");
+  out.org.heroesDir = (o.heroesDir === undefined) ? "" : (o.heroesDir || "");
   out.org.staff = (Array.isArray(o.staff)?o.staff:[]).map(function(s){
     return {id:s.id||uid(), name:s.name||"", title:s.title||""}; });
   out.org.links = (Array.isArray(o.links)?o.links:[]).map(function(l){
