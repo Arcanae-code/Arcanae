@@ -1,51 +1,105 @@
 {
   "org": {
     "tagline": "Structure Overwatch. Quatre équipes, quatre couleurs, un même papillon.",
+    "heroesDir": "heroes/",
     "staff": [
-      { "id": "s1", "name": "Nexola",  "title": "CEO" },
-      { "id": "s2", "name": "Hirosai", "title": "co-CEO" }
+      { "id": "s1", "name": "Nexola",   "title": "CEO" },
+      { "id": "s2", "name": "Hirosai",  "title": "co-CEO" }
     ],
     "links": [
-      { "id": "l1", "platform": "tiktok",    "label": "TikTok",    "url": "" },
-      { "id": "l2", "platform": "instagram", "label": "Instagram", "url": "https://www.instagram.com/arcanae.ow/" },
-      { "id": "l3", "platform": "twitch",    "label": "Twitch",    "url": "https://www.twitch.tv/nexola_arcn" },
-      { "id": "l4", "platform": "discord",   "label": "Discord",   "url": "https://discord.gg/d3YckVhFsU" }
+      { "id": "l1", "platform": "tiktok",     "label": "TikTok",     "url": "" },
+      { "id": "l2", "platform": "instagram",  "label": "Instagram",  "url": "https://www.instagram.com/arcanae.ow/" },
+      { "id": "l3", "platform": "twitch",     "label": "Twitch",     "url": "https://www.twitch.tv/nexola_arcn" },
+      { "id": "l4", "platform": "discord",    "label": "Discord",    "url": "https://discord.gg/d3YckVhFsU" }
     ]
   },
   "teams": [
     {
       "id": "lunaris", "name": "Lunaris", "color": "#9B6BF0", "colorLabel": "violet",
-      "logo": "logo-lunaris.png", "lightCrest": false, "players": []
+      "logo": "logo-lunaris.png", "lightCrest": false,
+      "players": []
     },
     {
       "id": "solaris", "name": "Solaris", "color": "#E85252", "colorLabel": "rouge",
       "logo": "", "lightCrest": true,
       "players": [
-        { "id": "p1", "pseudo": "Achpoi",         "role": "Tank",     "heroes": "", "captain": false },
-        { "id": "p2", "pseudo": "Ensteurgaming",  "role": "Hitscan",  "heroes": "", "captain": false },
-        { "id": "p3", "pseudo": "Lelazer",        "role": "Flex DPS", "heroes": "", "captain": false }
+        {
+          "id": "p1", "pseudo": "Achpoi", "role": "Tank",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p2", "pseudo": "Ensteurgaming", "role": "Hitscan",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p3", "pseudo": "Lelazer", "role": "Flex DPS",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        }
       ]
     },
     {
       "id": "stellaris", "name": "Stellaris", "color": "#F3C544", "colorLabel": "jaune",
       "logo": "", "lightCrest": true,
       "players": [
-        { "id": "p4", "pseudo": "Aphi",    "role": "Tank",          "heroes": "", "captain": false },
-        { "id": "p5", "pseudo": "Synki",   "role": "Hitscan",       "heroes": "", "captain": true  },
-        { "id": "p6", "pseudo": "Roka",    "role": "Flex DPS",      "heroes": "", "captain": false },
-        { "id": "p7", "pseudo": "Franui",  "role": "Main Support",  "heroes": "", "captain": false },
-        { "id": "p8", "pseudo": "Lucifae", "role": "Flex Support",  "heroes": "", "captain": false }
+        {
+          "id": "p4", "pseudo": "Aphi", "role": "Tank",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p5", "pseudo": "Synki", "role": "Hitscan",
+          "main": "", "heroes": "", "captain": true,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p6", "pseudo": "Roka", "role": "Flex DPS",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p7", "pseudo": "Franui", "role": "Main Support",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p8", "pseudo": "Lucifae", "role": "Flex Support",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        }
       ]
     },
     {
       "id": "tempest", "name": "Tempest", "color": "#CFE6FF", "colorLabel": "bleu glacé",
       "logo": "logo-tempest.png", "lightCrest": false,
       "players": [
-        { "id": "p9",  "pseudo": "Pcou",        "role": "Tank",         "heroes": "", "captain": false },
-        { "id": "p10", "pseudo": "Hirosai",     "role": "Hitscan",      "heroes": "", "captain": false },
-        { "id": "p11", "pseudo": "MeChalo_",    "role": "Flex DPS",     "heroes": "", "captain": false },
-        { "id": "p12", "pseudo": "Aspin",       "role": "Main Support", "heroes": "", "captain": true },
-        { "id": "p13", "pseudo": "Ketsueki21",  "role": "En essai",     "heroes": "", "captain": false }
+        {
+          "id": "p9", "pseudo": "Pcou", "role": "Tank",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p10", "pseudo": "Hirosai", "role": "Hitscan",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p11", "pseudo": "MeChalo_", "role": "Flex DPS",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p12", "pseudo": "Aspin", "role": "Main Support",
+          "main": "", "heroes": "", "captain": true,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p13", "pseudo": "Ketsueki21", "role": "En essai",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        }
       ]
     }
   ]

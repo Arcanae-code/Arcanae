@@ -42,6 +42,7 @@ charger le logo de l'équipe et choisir un fond clair ou sombre derrière lui.
 {
   "org": {
     "tagline": "Structure Overwatch…",
+    "heroesDir": "heroes/",
     "staff": [{ "id": "s1", "name": "Nexola", "title": "CEO" }],
     "links": [{ "id": "l1", "platform": "tiktok", "label": "TikTok", "url": "https://…" }]
   },
@@ -51,25 +52,60 @@ charger le logo de l'équipe et choisir un fond clair ou sombre derrière lui.
     "color": "#CFE6FF",
     "colorLabel": "bleu glacé",
     "logo": "logo-tempest.png",
-    "lightCrest": true,
-    "players": [
-      { "id": "p9", "pseudo": "Pcou", "role": "Tank", "heroes": "Reinhardt, Sigma", "captain": false }
-    ]
+    "lightCrest": false,
+    "players": [{
+      "id": "p9",
+      "pseudo": "Pcou",
+      "role": "Tank",
+      "main": "reinhardt",
+      "heroes": "Reinhardt, Sigma",
+      "captain": false,
+      "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+    }]
   }]
 }
 ```
 
+### Les champs d'un joueur
+
 - `role` : Tank, Hitscan, Flex DPS, Main Support, Flex Support, Remplaçant, En essai, Coach, Manager.
   Le pictogramme se déduit du rôle : bouclier pour les tanks, réticule pour les DPS, croix pour les supports.
-- `platform` : tiktok, instagram, twitch, discord, youtube, x, ou site pour une icône générique.
+  **Coach et Manager sont affichés à part**, sous un bloc « Encadrement », en bas de la page d'équipe.
+- `main` : le personnage principal, affiché en grand sur la fiche du joueur.
+  Écrire le nom du fichier sans le dossier : `"reinhardt"` ou `"reinhardt.png"`, les deux marchent.
+  Le site va le chercher dans le dossier indiqué par `heroesDir`, donc `heroes/reinhardt.png`.
+- `heroes` : les héros joués, séparés par des virgules. Affichage en texte seulement.
+- `captain` : `true` pose l'étiquette « capitaine » à côté du pseudo. Sans guillemets.
+- `links` : les cinq réseaux du joueur. **Un réseau laissé vide n'apparaît pas du tout** —
+  aucun bouton grisé, aucune mention. Seuls les renseignés sont affichés.
+
+### Les images de personnages
+
+Déposer les PNG dans un dossier `heroes` à la racine du dépôt, nommés `nom.png` en minuscules
+et sans accent : `heroes/tracer.png`, `heroes/lucio.png`, `heroes/wrecking-ball.png`.
+
+Pour créer le dossier sur GitHub : *Add file → Upload files*, puis glisser le **dossier** `heroes`
+entier (et non les fichiers un par un, contrairement aux fichiers de la racine).
+
+Pour changer d'emplacement, modifier `heroesDir` dans `org`. La valeur doit finir par `/`.
+La laisser vide met les images à la racine du dépôt.
+
+### Les autres champs
+
+- `platform` d'un lien de structure : tiktok, instagram, twitch, discord, youtube, x,
+  ou site pour une icône générique.
 - `logo` : un nom de fichier du dépôt, ou une image encodée en `data:image/png;base64,…`
   (ce que produit l'éditeur quand on charge un logo).
-- `lightCrest` : `true` pose le logo sur une plaque claire — nécessaire pour un logo
-  aux détails sombres. `false` le laisse sur le fond sombre du site.
+- `crestBg` : couleur de fond derrière le logo d'une équipe, par exemple `"#5A6B84"`.
+  Absent ou vide, le logo est posé directement sur le fond du site.
 - `id` : n'importe quelle chaîne unique.
 
-La copie de secours intégrée à `index.html` ne sert que si `data.json` est introuvable.
-Tant que `data.json` est en place, c'est lui qui fait foi.
+## Naviguer dans le site
+
+Accueil → une équipe → un joueur. Chaque ligne de roster est cliquable et mène à la fiche
+du joueur : son personnage en grand, ses héros, et ses réseaux.
+
+L'adresse d'une fiche est de la forme `#tempest--p9`, donc chaque joueur a son lien partageable.
 
 ## Nom de domaine
 

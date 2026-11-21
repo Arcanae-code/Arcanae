@@ -98,6 +98,26 @@ img{max-width:100%;display:block}
 .prow .heroes{color:var(--dim);font-size:17px}
 .prow .heroes em{font-style:normal;color:var(--faint)}
 .empty-note{padding:26px 0;color:var(--faint);font-size:17px;border-bottom:1px solid var(--hair)}
+a.prow{text-decoration:none;color:inherit}
+a.prow:hover{background:linear-gradient(90deg,rgba(255,255,255,.045),transparent 72%)}
+a.prow:hover .pseudo{color:var(--accent)}
+.block-title{font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;color:var(--faint);margin:40px 0 10px;font-weight:600}
+.pcard{display:flex;gap:36px;align-items:flex-start;flex-wrap:wrap;padding:40px 0 6px}
+.pmain{flex:0 0 auto;width:min(270px,54vw)}
+.pmain img{width:100%;height:auto;display:block}
+.pmain .none{border:1px dashed var(--hair);min-height:200px;display:grid;place-items:center;font-family:var(--sans);font-size:11px;letter-spacing:.06em;color:var(--faint);text-align:center;padding:0 14px;line-height:1.5}
+.pinfo{flex:1 1 300px;min-width:0}
+.prole{display:flex;align-items:center;gap:11px;font-family:var(--sans);font-size:11.5px;letter-spacing:.12em;color:var(--faint);margin:0}
+.prole .glyph{color:var(--accent)}
+.prole .glyph svg{width:20px;height:20px;display:block}
+.pinfo h2{font-size:clamp(40px,7vw,66px);font-weight:500;margin:7px 0 0;line-height:1;word-break:break-word}
+.plist{margin:18px 0 0;color:var(--dim);font-size:18px}
+.plist em{font-style:normal;color:var(--faint)}
+.psoc{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 0}
+.psoc a{display:flex;align-items:center;gap:9px;border:1px solid var(--hair);padding:9px 14px;text-decoration:none;font-family:var(--sans);font-size:13px;color:var(--dim)}
+.psoc a svg{width:17px;height:17px;flex:0 0 17px;fill:var(--dim)}
+.psoc a:hover{border-color:var(--accent);color:var(--text)}
+.psoc a:hover svg{fill:var(--accent)}
 
 .draft{margin:0 0 22px;padding:14px 18px;background:rgba(243,197,68,.09);border-left:3px solid #F3C544;font-family:var(--sans);font-size:13px;color:var(--dim);line-height:1.6}
 .draft b{color:var(--text);font-weight:600}
@@ -226,7 +246,7 @@ var PLATFORMS = ["tiktok","instagram","twitch","discord","youtube","x","site"];
 var LSKEY = "arcanae-brouillon";
 var PALETTE = ["#9B6BF0","#E85252","#F3C544","#CFE6FF","#5BD6A8","#F08BC8","#7FB4F5"];
 
-var FALLBACK = {org:{tagline:"",staff:[],links:[]}, teams:[]};
+var FALLBACK = {org:{tagline:"",heroesDir:"heroes/",staff:[],links:[]}, teams:[]};
 try{
   var seedEl = document.getElementById("seed");
   if(seedEl) FALLBACK = JSON.parse(seedEl.textContent);
@@ -246,6 +266,17 @@ function tint(hex){
   var n = parseInt(m[1],16), r=(n>>16)&255, g=(n>>8)&255, b=n&255, k=0.90;
   return "rgb("+Math.round(r+(255-r)*k)+","+Math.round(g+(255-g)*k)+","+Math.round(b+(255-b)*k)+")";
 }
+var SOCIALS = ["twitch","discord","instagram","tiktok","x","youtube"];
+var SOCIAL_LABEL = {twitch:"Twitch",discord:"Discord",instagram:"Instagram",tiktok:"TikTok",x:"X",youtube:"YouTube"};
+var STAFF_ROLES = ["Coach","Manager"];
+function isStaff(p){ return STAFF_ROLES.indexOf(p.role) >= 0; }
+function heroSrc(v){
+  v = String(v||"").trim();
+  if(!v) return "";
+  if(/^(https?:|data:)/i.test(v) || v.indexOf("/") >= 0) return v;
+  if(!/\.(png|jpe?g|webp|svg|gif)$/i.test(v)) v += ".png";
+  return (state.org.heroesDir||"") + v;
+}
 function crestBg(t){ return t.crestBg || ""; }
 function crestCls(t){ return t.crestBg ? " light" : ""; }
 function crestSty(t){ var b = crestBg(t); return b ? ' style="background:'+b+'"' : ''; }
@@ -259,6 +290,7 @@ function normalise(d){
   if(!d || typeof d !== "object") return out;
   var o = d.org || {};
   out.org.tagline = o.tagline || "";
+  out.org.heroesDir = (o.heroesDir === undefined) ? "heroes/" : (o.heroesDir || "");
   out.org.staff = (Array.isArray(o.staff)?o.staff:[]).map(function(s){
     return {id:s.id||uid(), name:s.name||"", title:s.title||""}; });
   out.org.links = (Array.isArray(o.links)?o.links:[]).map(function(l){
@@ -273,8 +305,11 @@ function normalise(d){
       lightCrest: t.lightCrest !== false,
       crestBg: t.crestBg || "",
       players: (Array.isArray(t.players)?t.players:[]).map(function(p){
+        var L = (p.links && typeof p.links === "object") ? p.links : {};
         return {id:p.id||uid(), pseudo:p.pseudo||"", role:p.role||"Tank",
-                heroes:p.heroes||"", captain:!!p.captain};
+                heroes:p.heroes||"", main:p.main||"", captain:!!p.captain,
+                links:{twitch:L.twitch||"", discord:L.discord||"", instagram:L.instagram||"",
+                       tiktok:L.tiktok||"", x:L.x||"", youtube:L.youtube||""}};
       })
     };
   });
@@ -311,10 +346,18 @@ function downloadJSON(){
 }
 
 /* ── routage ─────────────────────────────────── */
-function current(){
+function route(){
   var h = (location.hash||"").replace(/^#/,"");
-  return teamById(h) ? h : "accueil";
+  var i = h.indexOf("--");
+  if(i > 0){
+    var t0 = teamById(h.slice(0,i));
+    var p0 = t0 && byId(t0.players, h.slice(i+2));
+    if(p0) return {kind:"player", team:t0, player:p0};
+  }
+  var t1 = teamById(h);
+  return t1 ? {kind:"team", team:t1} : {kind:"home"};
 }
+function current(){ var r = route(); return r.kind === "home" ? "accueil" : r.team.id; }
 function href(k){ return location.pathname + location.search + "#" + k; }
 
 function renderNav(){
@@ -469,14 +512,13 @@ function teamHTML(id){
   }else if(t.players.length === 0){
     roster = '<div class="roster"><p class="empty-note">Effectif à compléter.</p></div>';
   }else{
-    roster = '<div class="roster">'+ t.players.map(function(p){
-      var hs = (p.heroes||"").split(",").map(function(s){return s.trim();}).filter(Boolean);
-      return '<div class="prow">'+ roleGlyph(p.role)+
-        '<span class="role">'+esc(p.role||"")+'</span>'+
-        '<span class="pseudo">'+esc(p.pseudo||"—")+
-          (p.captain?'<span class="cap">capitaine</span>':"")+'</span>'+
-        '<span class="heroes">'+(hs.length?esc(hs.join(", ")):'<em>héros à renseigner</em>')+'</span></div>';
-    }).join("") +'</div>';
+    var joueurs = t.players.filter(function(p){ return !isStaff(p); });
+    var encadr  = t.players.filter(isStaff);
+    roster = "";
+    if(joueurs.length) roster += '<div class="roster">'+ joueurs.map(function(p){ return playerRow(t,p); }).join("") +'</div>';
+    else roster += '<div class="roster"><p class="empty-note">Effectif à compléter.</p></div>';
+    if(encadr.length) roster += '<p class="block-title">Encadrement</p><div class="roster">'+
+      encadr.map(function(p){ return playerRow(t,p); }).join("") +'</div>';
   }
 
   return draftHTML()+
@@ -488,6 +530,56 @@ function teamHTML(id){
     '<a class="back" href="'+href("accueil")+'">Retour à la Arcanae</a></section>'+
   '<footer><p>Les héros indiqués sont les picks principaux de chaque joueur.</p>'+
   '<span class="sig">Arcana '+esc(t.name.toLowerCase())+'</span></footer>';
+}
+
+function playerRow(t,p){
+  var hs = (p.heroes||"").split(",").map(function(s){return s.trim();}).filter(Boolean);
+  return '<a class="prow" href="'+href(t.id+"--"+p.id)+'">'+ roleGlyph(p.role)+
+    '<span class="role">'+esc(p.role||"")+'</span>'+
+    '<span class="pseudo">'+esc(p.pseudo||"—")+
+      (p.captain?'<span class="cap">capitaine</span>':"")+'</span>'+
+    '<span class="heroes">'+(hs.length?esc(hs.join(", ")):'<em>héros à renseigner</em>')+'</span></a>';
+}
+
+/* ── page joueur ─────────────────────────────── */
+function playerHTML(t,p){
+  var hs = (p.heroes||"").split(",").map(function(s){return s.trim();}).filter(Boolean);
+  var src = heroSrc(p.main);
+  var visuel = src
+    ? '<div class="pmain"><img src="'+esc(src)+'" alt="'+esc(p.main)+'"></div>'
+    : (editing ? '<div class="pmain"><div class="none">Personnage à renseigner<br>dans le champ ci-contre</div></div>' : '');
+
+  var liens = SOCIALS.filter(function(k){ return p.links[k]; }).map(function(k){
+    return '<a href="'+esc(p.links[k])+'" target="_blank" rel="noopener">'+
+           platformIcon(k)+SOCIAL_LABEL[k]+'</a>';
+  }).join("");
+
+  var ed = "";
+  if(editing){
+    ed = '<div class="esec"><h3>Fiche de '+esc(p.pseudo||"ce joueur")+'</h3><div class="fields">'+
+      '<div class="field"><label>Pseudo</label><input data-f="pseudo" data-id="'+p.id+'" type="text" value="'+esc(p.pseudo)+'"></div>'+
+      '<div class="field"><label>Personnage principal (nom du png)</label><input data-f="main" data-id="'+p.id+'" list="heroes-ow" type="text" value="'+esc(p.main)+'" placeholder="tracer"></div>'+
+      '<div class="field"><label>Héros joués</label><input data-f="heroes" data-id="'+p.id+'" list="heroes-ow" type="text" value="'+esc(p.heroes)+'" placeholder="Séparés par des virgules"></div>'+
+      SOCIALS.map(function(k){
+        return '<div class="field"><label>'+SOCIAL_LABEL[k]+'</label><input data-soc="'+k+'" data-id="'+p.id+'" type="text" value="'+esc(p.links[k])+'" placeholder="https://…"></div>';
+      }).join("")+
+    '</div></div>';
+  }
+
+  return draftHTML()+
+  '<section class="pcard" style="--accent:'+esc(t.color)+'">'+visuel+
+    '<div class="pinfo">'+
+      '<p class="prole">'+roleGlyph(p.role)+esc(p.role||"")+
+        (p.captain?' — capitaine':'')+'</p>'+
+      '<h2>'+esc(p.pseudo||"—")+'</h2>'+
+      '<p class="plist">'+(hs.length?esc(hs.join(", ")):'<em>héros à renseigner</em>')+'</p>'+
+      (liens?'<div class="psoc">'+liens+'</div>':'')+
+    '</div>'+
+  '</section>'+
+  '<section style="--accent:'+esc(t.color)+'">'+ed+
+    '<a class="back" href="'+href(t.id)+'">Retour à Arcana '+esc(t.name.toLowerCase())+'</a></section>'+
+  '<footer><p>Membre de l\'équipe Arcana '+esc(t.name.toLowerCase())+'.</p>'+
+  '<span class="sig">Arcanae — Overwatch</span></footer>';
 }
 
 function editRow(t,p){
@@ -506,11 +598,13 @@ function editRow(t,p){
 
 /* ── rendu ───────────────────────────────────── */
 function render(){
-  var here = current();
+  var r = route();
   renderNav();
-  el("view").innerHTML = here === "accueil" ? homeHTML() : teamHTML(here);
+  el("view").innerHTML = r.kind === "home"   ? homeHTML()
+                       : r.kind === "player" ? playerHTML(r.team, r.player)
+                       :                       teamHTML(r.team.id);
   armed = null;
-  wire(here);
+  wire(current());
 }
 
 function wire(here){
@@ -526,6 +620,12 @@ function wire(here){
     if((k = t.getAttribute("data-l"))){ var l = byId(state.org.links,id); if(l && k!=="platform"){ l[k]=t.value; saveDraft(); } return; }
     if((k = t.getAttribute("data-t"))){ var tm = teamById(id); if(tm){ tm[k]=t.value; saveDraft();
         if(k==="color"||k==="name") render(); } return; }
+    var sk = t.getAttribute("data-soc");
+    if(sk && here!=="accueil"){
+      var ts = teamById(here), ps = ts && byId(ts.players,id);
+      if(ps){ ps.links[sk] = t.value; saveDraft(); }
+      return;
+    }
     var f = t.getAttribute("data-f");
     if(f && f!=="move" && f!=="captain" && here!=="accueil"){
       var tt = teamById(here), p = tt && byId(tt.players,id);
@@ -557,7 +657,8 @@ function wire(here){
     var v;
 
     if((v = b.getAttribute("data-add"))){
-      teamById(v).players.push({id:uid(), pseudo:"", role:"Tank", heroes:"", captain:false});
+      teamById(v).players.push({id:uid(), pseudo:"", role:"Tank", heroes:"", main:"", captain:false,
+        links:{twitch:"",discord:"",instagram:"",tiktok:"",x:"",youtube:""}});
       saveDraft(); render(); return;
     }
     if((v = b.getAttribute("data-addstaff"))){
