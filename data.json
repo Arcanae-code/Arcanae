@@ -96,9 +96,9 @@
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         },
         {
-          "id": "p13", "pseudo": "Ketsueki21", "role": "En essai",
+          "id": "p13", "pseudo": "Ketsueki21", "role": "Flex Support",
           "main": "", "heroes": "", "captain": false,
-          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+          "links": { "twitch": "https://www.twitch.tv/ketsueki_oxton", "discord": "", "instagram": "https://www.instagram.com/ketsueki_oxton/", "tiktok": "", "x": "" }
         }
       ]
     }
