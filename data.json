@@ -37,6 +37,11 @@
           "id": "p3", "pseudo": "Lelazer", "role": "Flex DPS",
           "main": "", "heroes": "", "captain": false,
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p14", "pseudo": "Nexola", "role": "Manager",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         }
       ]
     },
@@ -68,6 +73,16 @@
           "id": "p8", "pseudo": "Lucifae", "role": "Flex Support",
           "main": "", "heroes": "", "captain": false,
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p15", "pseudo": "Vesper", "role": "Manager",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p16", "pseudo": "Hestia", "role": "Coach",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         }
       ]
     },
@@ -96,9 +111,24 @@
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         },
         {
-          "id": "p13", "pseudo": "Ketsueki21", "role": "Flex Support",
+          "id": "p13", "pseudo": "Ketsueki21", "role": "En essai",
           "main": "", "heroes": "", "captain": false,
-          "links": { "twitch": "https://www.twitch.tv/ketsueki_oxton", "discord": "", "instagram": "https://www.instagram.com/ketsueki_oxton/", "tiktok": "", "x": "" }
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p17", "pseudo": "Wolfsadow", "role": "Manager",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p18", "pseudo": "Kanameh", "role": "Coach",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+        },
+        {
+          "id": "p19", "pseudo": "NathGenji", "role": "Assistant coach",
+          "main": "", "heroes": "", "captain": false,
+          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         }
       ]
     }

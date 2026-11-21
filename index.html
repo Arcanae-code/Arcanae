@@ -280,7 +280,7 @@ footer .sig{font-family:var(--sans);font-size:11.5px;letter-spacing:.1em;color:v
 (function(){
 "use strict";
 
-var ROLES = ["Tank","Hitscan","Flex DPS","Main Support","Flex Support","Remplaçant","En essai","Coach","Manager"];
+var ROLES = ["Tank","Hitscan","Flex DPS","Main Support","Flex Support","Remplaçant","En essai","Manager","Coach","Assistant coach"];
 var PLATFORMS = ["tiktok","instagram","twitch","discord","youtube","x","site"];
 var LSKEY = "arcanae-brouillon";
 var PALETTE = ["#9B6BF0","#E85252","#F3C544","#CFE6FF","#5BD6A8","#F08BC8","#7FB4F5"];
@@ -307,8 +307,10 @@ function tint(hex){
 }
 var SOCIALS = ["twitch","discord","instagram","tiktok","x","youtube"];
 var SOCIAL_LABEL = {twitch:"Twitch",discord:"Discord",instagram:"Instagram",tiktok:"TikTok",x:"X",youtube:"YouTube"};
-var STAFF_ROLES = ["Coach","Manager"];
-function isStaff(p){ return STAFF_ROLES.indexOf(p.role) >= 0; }
+function isStaff(p){
+  var r = String(p.role||"").toLowerCase();
+  return r.indexOf("coach") >= 0 || r.indexOf("manager") >= 0;
+}
 function heroSrc(v){
   v = String(v||"").trim();
   if(!v) return "";
@@ -577,7 +579,7 @@ function playerRow(t,p){
     '<span class="role">'+esc(p.role||"")+'</span>'+
     '<span class="pseudo">'+esc(p.pseudo||"—")+
       (p.captain?'<span class="cap">capitaine</span>':"")+'</span>'+
-    '<span class="heroes">'+(hs.length?esc(hs.join(", ")):'<em>héros à renseigner</em>')+'</span></a>';
+    '<span class="heroes">'+(hs.length?esc(hs.join(", ")):(isStaff(p)?'':'<em>héros à renseigner</em>'))+'</span></a>';
 }
 
 /* ── page joueur ─────────────────────────────── */
@@ -611,7 +613,7 @@ function playerHTML(t,p){
       '<p class="prole">'+roleGlyph(p.role)+esc(p.role||"")+
         (p.captain?' — capitaine':'')+'</p>'+
       '<h2>'+esc(p.pseudo||"—")+'</h2>'+
-      '<p class="plist">'+(hs.length?esc(hs.join(", ")):'<em>héros à renseigner</em>')+'</p>'+
+      (hs.length||!isStaff(p)?'<p class="plist">'+(hs.length?esc(hs.join(", ")):'<em>héros à renseigner</em>')+'</p>':'')+
       (liens?'<div class="psoc">'+liens+'</div>':'')+
     '</div>'+
   '</section>'+
