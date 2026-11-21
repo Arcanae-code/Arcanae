@@ -112,7 +112,7 @@
         },
         {
           "id": "p13", "pseudo": "Ketsueki21", "role": "En essai",
-          "main": "", "heroes": "", "captain": false,
+          "main": "kiriko", "heroes": "Kiriko", "captain": false,
           "links": { "twitch": "https://www.twitch.tv/ketsueki_oxton", "discord": "", "instagram": "https://www.instagram.com/ketsueki_oxton/", "tiktok": "", "x": "", "youtube": "" }
         },
         {
