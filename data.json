@@ -40,7 +40,7 @@
         },
         {
           "id": "p14", "pseudo": "Nexola", "role": "Manager",
-          "main": "", "heroes": "", "captain": false,
+          "main": "", "heroes": "vital", "captain": false,
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         }
       ]
@@ -81,7 +81,7 @@
         },
         {
           "id": "p16", "pseudo": "Hestia", "role": "Coach",
-          "main": "", "heroes": "", "captain": false,
+          "main": "", "heroes": "cassidy", "captain": false,
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         }
       ]
@@ -92,42 +92,42 @@
       "players": [
         {
           "id": "p9", "pseudo": "Pcou", "role": "Tank",
-          "main": "", "heroes": "", "captain": false,
+          "main": "", "heroes": "dva", "captain": false,
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         },
         {
           "id": "p10", "pseudo": "Hirosai", "role": "Hitscan",
-          "main": "", "heroes": "", "captain": false,
+          "main": "", "heroes": "emre", "captain": false,
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         },
         {
           "id": "p11", "pseudo": "MeChalo_", "role": "Flex DPS",
-          "main": "", "heroes": "", "captain": false,
+          "main": "", "heroes": "anran", "captain": false,
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         },
         {
           "id": "p12", "pseudo": "Aspin", "role": "Main Support",
-          "main": "", "heroes": "", "captain": true,
+          "main": "", "heroes": "lucio", "captain": true,
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         },
         {
           "id": "p13", "pseudo": "Ketsueki21", "role": "En essai",
           "main": "", "heroes": "", "captain": false,
-          "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
+          "links": { "twitch": "https://www.twitch.tv/ketsueki_oxton", "discord": "", "instagram": "https://www.instagram.com/ketsueki_oxton/", "tiktok": "", "x": "" }
         },
         {
           "id": "p17", "pseudo": "Wolfsadow", "role": "Manager",
-          "main": "", "heroes": "", "captain": false,
+          "main": "", "heroes": "ange", "captain": false,
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         },
         {
           "id": "p18", "pseudo": "Kanameh", "role": "Coach",
-          "main": "", "heroes": "", "captain": false,
+          "main": "", "heroes": "mizuki", "captain": false,
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         },
         {
           "id": "p19", "pseudo": "NathGenji", "role": "Assistant coach",
-          "main": "", "heroes": "", "captain": false,
+          "main": "", "heroes": "vendetta", "captain": false,
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "" }
         }
       ]
