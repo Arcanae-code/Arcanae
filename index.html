@@ -311,12 +311,17 @@ function isStaff(p){
   var r = String(p.role||"").toLowerCase();
   return r.indexOf("coach") >= 0 || r.indexOf("manager") >= 0;
 }
-function heroSrc(v){
+function heroFile(v){
   v = String(v||"").trim();
   if(!v) return "";
   if(/^(https?:|data:)/i.test(v) || v.indexOf("/") >= 0) return v;
-  if(!/\.(png|jpe?g|webp|svg|gif)$/i.test(v)) v += ".png";
-  return (state.org.heroesDir||"") + v;
+  if(/\.(png|jpe?g|webp|svg|gif)$/i.test(v)) return (state.org.heroesDir||"") + v;
+  v = v.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,"");
+  return v ? (state.org.heroesDir||"") + v + ".png" : "";
+}
+/* main d'abord ; a defaut, le premier nom de la liste heroes */
+function heroSrc(p){
+  return heroFile(p.main || (p.heroes||"").split(",")[0]);
 }
 function crestBg(t){ return t.crestBg || ""; }
 function crestCls(t){ return t.crestBg ? " light" : ""; }
@@ -585,7 +590,7 @@ function playerRow(t,p){
 /* ── page joueur ─────────────────────────────── */
 function playerHTML(t,p){
   var hs = (p.heroes||"").split(",").map(function(s){return s.trim();}).filter(Boolean);
-  var src = heroSrc(p.main);
+  var src = heroSrc(p);
   var visuel = src
     ? '<div class="pmain"><img src="'+esc(src)+'" alt="'+esc(p.main)+'"></div>'
     : (editing ? '<div class="pmain"><div class="none">Personnage à renseigner<br>dans le champ ci-contre</div></div>' : '');
