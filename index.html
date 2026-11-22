@@ -102,10 +102,16 @@ a.prow{text-decoration:none;color:inherit}
 a.prow:hover{background:linear-gradient(90deg,rgba(255,255,255,.045),transparent 72%)}
 a.prow:hover .pseudo{color:var(--accent)}
 .block-title{font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;color:var(--faint);margin:40px 0 10px;font-weight:600}
-.pcard{display:flex;gap:36px;align-items:flex-start;flex-wrap:wrap;padding:40px 0 6px}
-.pmain{flex:0 0 auto;width:min(270px,54vw)}
-.pmain img{width:100%;height:auto;display:block}
-.pmain .none{border:1px dashed var(--hair);min-height:200px;display:grid;place-items:center;font-family:var(--sans);font-size:11px;letter-spacing:.06em;color:var(--faint);text-align:center;padding:0 14px;line-height:1.5}
+.pcard{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap;padding:40px 0 6px}
+.pbox{flex:0 0 auto;width:184px;height:184px;display:grid;place-items:center;overflow:hidden}
+.pbox.hero img{max-width:100%;max-height:100%;width:auto;height:auto;display:block}
+.pbox.shot{border:1px solid var(--hair)}
+.pbox.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.pbox.ph{border:1px dashed var(--hair);font-family:var(--sans);font-size:10.5px;letter-spacing:.06em;color:var(--faint);text-align:center;padding:0 12px;line-height:1.6}
+.pnote{margin:22px 0 0;max-width:54ch;color:var(--dim);font-size:17.5px;line-height:1.65;border-left:2px solid var(--accent);padding-left:17px;white-space:pre-line}
+textarea{font-family:var(--sans);font-size:14px;background:var(--ink-2);color:var(--text);border:1px solid var(--hair);padding:9px 10px;width:100%;min-height:104px;resize:vertical;line-height:1.55;border-radius:0}
+textarea:focus{border-color:var(--hair-2);outline:none}
+.field.wide2{grid-column:1 / -1}
 .pinfo{flex:1 1 300px;min-width:0}
 .prole{display:flex;align-items:center;gap:11px;font-family:var(--sans);font-size:11.5px;letter-spacing:.12em;color:var(--faint);margin:0}
 .prole .glyph{color:var(--accent)}
@@ -190,6 +196,7 @@ footer .sig{font-family:var(--sans);font-size:11.5px;letter-spacing:.1em;color:v
   .crest{height:128px}
   .crest img{height:128px}
   .crest.empty{width:128px;height:128px}
+  .pbox{width:136px;height:136px}
   .theader{gap:20px;padding:30px 0 24px}
   .section{padding:46px 0}
   .erow.link,.erow.staff{grid-template-columns:1fr 34px}
@@ -285,7 +292,7 @@ var PLATFORMS = ["tiktok","instagram","twitch","discord","youtube","x","site"];
 var LSKEY = "arcanae-brouillon";
 var PALETTE = ["#9B6BF0","#E85252","#F3C544","#CFE6FF","#5BD6A8","#F08BC8","#7FB4F5"];
 
-var FALLBACK = {org:{tagline:"",heroesDir:"",staff:[],links:[]}, teams:[]};
+var FALLBACK = {org:{tagline:"",heroesDir:"",photosDir:"",staff:[],links:[]}, teams:[]};
 try{
   var seedEl = document.getElementById("seed");
   if(seedEl) FALLBACK = JSON.parse(seedEl.textContent);
@@ -311,18 +318,17 @@ function isStaff(p){
   var r = String(p.role||"").toLowerCase();
   return r.indexOf("coach") >= 0 || r.indexOf("manager") >= 0;
 }
-function heroFile(v){
+function fileIn(dir, v){
   v = String(v||"").trim();
   if(!v) return "";
   if(/^(https?:|data:)/i.test(v) || v.indexOf("/") >= 0) return v;
-  if(/\.(png|jpe?g|webp|svg|gif)$/i.test(v)) return (state.org.heroesDir||"") + v;
+  if(/\.(png|jpe?g|webp|svg|gif)$/i.test(v)) return dir + v;
   v = v.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,"");
-  return v ? (state.org.heroesDir||"") + v + ".png" : "";
+  return v ? dir + v + ".png" : "";
 }
 /* main d'abord ; a defaut, le premier nom de la liste heroes */
-function heroSrc(p){
-  return heroFile(p.main || (p.heroes||"").split(",")[0]);
-}
+function heroSrc(p){ return fileIn(state.org.heroesDir||"", p.main || (p.heroes||"").split(",")[0]); }
+function photoSrc(p){ return fileIn(state.org.photosDir||"", p.photo); }
 function crestBg(t){ return t.crestBg || ""; }
 function crestCls(t){ return t.crestBg ? " light" : ""; }
 function crestSty(t){ var b = crestBg(t); return b ? ' style="background:'+b+'"' : ''; }
@@ -336,7 +342,8 @@ function normalise(d){
   if(!d || typeof d !== "object") return out;
   var o = d.org || {};
   out.org.tagline = o.tagline || "";
-  out.org.heroesDir = (o.heroesDir === undefined) ? "" : (o.heroesDir || "");
+  out.org.heroesDir  = (o.heroesDir  === undefined) ? "" : (o.heroesDir  || "");
+  out.org.photosDir  = (o.photosDir  === undefined) ? "" : (o.photosDir  || "");
   out.org.staff = (Array.isArray(o.staff)?o.staff:[]).map(function(s){
     return {id:s.id||uid(), name:s.name||"", title:s.title||""}; });
   out.org.links = (Array.isArray(o.links)?o.links:[]).map(function(l){
@@ -353,7 +360,8 @@ function normalise(d){
       players: (Array.isArray(t.players)?t.players:[]).map(function(p){
         var L = (p.links && typeof p.links === "object") ? p.links : {};
         return {id:p.id||uid(), pseudo:p.pseudo||"", role:p.role||"Tank",
-                heroes:p.heroes||"", main:p.main||"", captain:!!p.captain,
+                heroes:p.heroes||"", main:p.main||"", photo:p.photo||"", note:p.note||"",
+                captain:!!p.captain,
                 links:{twitch:L.twitch||"", discord:L.discord||"", instagram:L.instagram||"",
                        tiktok:L.tiktok||"", x:L.x||"", youtube:L.youtube||""}};
       })
@@ -590,10 +598,12 @@ function playerRow(t,p){
 /* ── page joueur ─────────────────────────────── */
 function playerHTML(t,p){
   var hs = (p.heroes||"").split(",").map(function(s){return s.trim();}).filter(Boolean);
-  var src = heroSrc(p);
-  var visuel = src
-    ? '<div class="pmain"><img src="'+esc(src)+'" alt="'+esc(p.main)+'"></div>'
-    : (editing ? '<div class="pmain"><div class="none">Personnage à renseigner<br>dans le champ ci-contre</div></div>' : '');
+  var src = heroSrc(p), shot = photoSrc(p);
+  var visuel = "";
+  if(src) visuel += '<div class="pbox hero"><img src="'+esc(src)+'" alt="'+esc(p.heroes||p.main)+'"></div>';
+  else if(editing) visuel += '<div class="pbox ph">Personnage<br>à renseigner</div>';
+  if(shot) visuel += '<div class="pbox shot"><img src="'+esc(shot)+'" alt="'+esc(p.pseudo)+'"></div>';
+  else if(editing) visuel += '<div class="pbox ph">Photo<br>à renseigner</div>';
 
   var liens = SOCIALS.filter(function(k){ return p.links[k]; }).map(function(k){
     return '<a href="'+esc(p.links[k])+'" target="_blank" rel="noopener">'+
@@ -606,6 +616,8 @@ function playerHTML(t,p){
       '<div class="field"><label>Pseudo</label><input data-f="pseudo" data-id="'+p.id+'" type="text" value="'+esc(p.pseudo)+'"></div>'+
       '<div class="field"><label>Personnage principal (nom du png)</label><input data-f="main" data-id="'+p.id+'" list="heroes-ow" type="text" value="'+esc(p.main)+'" placeholder="tracer"></div>'+
       '<div class="field"><label>Héros joués</label><input data-f="heroes" data-id="'+p.id+'" list="heroes-ow" type="text" value="'+esc(p.heroes)+'" placeholder="Séparés par des virgules"></div>'+
+      '<div class="field"><label>Photo de la personne (nom du png)</label><input data-f="photo" data-id="'+p.id+'" type="text" value="'+esc(p.photo)+'" placeholder="photopcou"></div>'+
+      '<div class="field wide2"><label>Mot libre, affiché tel quel</label><textarea data-f="note" data-id="'+p.id+'" placeholder="À remplir par la personne, comme elle veut.">'+esc(p.note)+'</textarea></div>'+
       SOCIALS.map(function(k){
         return '<div class="field"><label>'+SOCIAL_LABEL[k]+'</label><input data-soc="'+k+'" data-id="'+p.id+'" type="text" value="'+esc(p.links[k])+'" placeholder="https://…"></div>';
       }).join("")+
@@ -619,6 +631,7 @@ function playerHTML(t,p){
         (p.captain?' — capitaine':'')+'</p>'+
       '<h2>'+esc(p.pseudo||"—")+'</h2>'+
       (hs.length||!isStaff(p)?'<p class="plist">'+(hs.length?esc(hs.join(", ")):'<em>héros à renseigner</em>')+'</p>':'')+
+      (p.note?'<p class="pnote">'+esc(p.note)+'</p>':'')+
       (liens?'<div class="psoc">'+liens+'</div>':'')+
     '</div>'+
   '</section>'+
@@ -703,7 +716,7 @@ function wire(here){
     var v;
 
     if((v = b.getAttribute("data-add"))){
-      teamById(v).players.push({id:uid(), pseudo:"", role:"Tank", heroes:"", main:"", captain:false,
+      teamById(v).players.push({id:uid(), pseudo:"", role:"Tank", heroes:"", main:"", photo:"", note:"", captain:false,
         links:{twitch:"",discord:"",instagram:"",tiktok:"",x:"",youtube:""}});
       saveDraft(); render(); return;
     }

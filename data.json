@@ -2,6 +2,7 @@
   "org": {
     "tagline": "Structure Overwatch. Quatre équipes, quatre couleurs, un même papillon.",
     "heroesDir": "",
+    "photosDir": "",
     "staff": [
       { "id": "s1", "name": "Nexola",   "title": "CEO" },
       { "id": "s2", "name": "Hirosai",  "title": "co-CEO" }
@@ -26,21 +27,25 @@
         {
           "id": "p1", "pseudo": "Achpoi", "role": "Tank",
           "main": "", "heroes": "", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p2", "pseudo": "Ensteurgaming", "role": "Hitscan",
           "main": "", "heroes": "", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p3", "pseudo": "Lelazer", "role": "Flex DPS",
           "main": "", "heroes": "", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p14", "pseudo": "Nexola", "role": "Manager",
           "main": "vital", "heroes": "Vital", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         }
       ]
@@ -52,36 +57,43 @@
         {
           "id": "p4", "pseudo": "Aphi", "role": "Tank",
           "main": "", "heroes": "", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p5", "pseudo": "Synki", "role": "Hitscan",
           "main": "", "heroes": "", "captain": true,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p6", "pseudo": "Roka", "role": "Flex DPS",
           "main": "", "heroes": "", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p7", "pseudo": "Franui", "role": "Main Support",
           "main": "", "heroes": "", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p8", "pseudo": "Lucifae", "role": "Flex Support",
           "main": "", "heroes": "", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p15", "pseudo": "Vesper", "role": "Manager",
           "main": "", "heroes": "", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p16", "pseudo": "Hestia", "role": "Coach",
           "main": "cassidy", "heroes": "Cassidy", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         }
       ]
@@ -93,41 +105,49 @@
         {
           "id": "p9", "pseudo": "Pcou", "role": "Tank",
           "main": "dva", "heroes": "D.Va", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p10", "pseudo": "Hirosai", "role": "Hitscan",
           "main": "emre", "heroes": "Emre", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p11", "pseudo": "MeChalo_", "role": "Flex DPS",
           "main": "anran", "heroes": "Anran", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p12", "pseudo": "Aspin", "role": "Main Support",
           "main": "mizuki", "heroes": "Mizuki", "captain": true,
+          "photo": "", "note": "",
           "links": { "twitch": "https://www.twitch.tv/aspinow", "discord": "", "instagram": "", "tiktok": "https://www.tiktok.com/@aspinow", "x": "https://x.com/_Aspin__", "youtube": "https://www.youtube.com/@AspinOW" }
         },
         {
           "id": "p13", "pseudo": "Ketsueki21", "role": "Flex Support",
           "main": "ana", "heroes": "Ana", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "https://www.twitch.tv/ketsueki_oxton", "discord": "", "instagram": "https://www.instagram.com/ketsueki_oxton/", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p17", "pseudo": "Wolfsadow", "role": "Manager",
           "main": "ange", "heroes": "Ange", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p18", "pseudo": "Kanameh", "role": "Coach",
           "main": "sombra", "heroes": "Sombra", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         },
         {
           "id": "p19", "pseudo": "NathGenji", "role": "Assistant coach",
           "main": "vendetta", "heroes": "Vendetta", "captain": false,
+          "photo": "", "note": "",
           "links": { "twitch": "", "discord": "", "instagram": "", "tiktok": "", "x": "", "youtube": "" }
         }
       ]

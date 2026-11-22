@@ -68,16 +68,34 @@ charger le logo de l'équipe et choisir un fond clair ou sombre derrière lui.
 
 ### Les champs d'un joueur
 
-- `role` : Tank, Hitscan, Flex DPS, Main Support, Flex Support, Remplaçant, En essai, Coach, Manager.
-  Le pictogramme se déduit du rôle : bouclier pour les tanks, réticule pour les DPS, croix pour les supports.
-  **Coach et Manager sont affichés à part**, sous un bloc « Encadrement », en bas de la page d'équipe.
-- `main` : le personnage principal, affiché en grand sur la fiche du joueur.
-  Écrire le nom du fichier sans le dossier : `"reinhardt"` ou `"reinhardt.png"`, les deux marchent.
-  Le site va le chercher dans le dossier indiqué par `heroesDir`, donc `heroes/reinhardt.png`.
-- `heroes` : les héros joués, séparés par des virgules. Affichage en texte seulement.
+- `role` : Tank, Hitscan, Flex DPS, Main Support, Flex Support, Remplaçant, En essai,
+  Manager, Coach, Assistant coach.
+  Le pictogramme se déduit du rôle : bouclier pour les tanks, réticule pour les DPS,
+  croix pour les supports.
+  **Tout rôle contenant « coach » ou « manager »** sort du roster et s'affiche dans un bloc
+  « Encadrement », en bas de la page d'équipe.
+- `main` : le personnage principal. Écrire le nom du fichier sans extension ni dossier :
+  `"dva"`. Si `main` est vide, le site prend le premier nom de `heroes`.
+  Les majuscules, accents, espaces et ponctuation sont ignorés quand il cherche le fichier,
+  donc `"D.Va"` trouve `dva.png` et `"Soldat : 76"` trouve `soldat76.png`.
+- `heroes` : texte libre, affiché tel quel. Écrire les noms proprement : `"D.Va, Sigma"`.
+- `photo` : la photo de la personne, même logique que `main`. Par exemple `"photopcou"`
+  pour le fichier `photopcou.png`. Laissé vide, aucune photo n'apparaît.
+- `note` : un mot libre, affiché tel quel sous les héros, sans titre ni étiquette.
+  Chacun écrit ce qu'il veut. Pour un retour à la ligne, utiliser `\n` dans le JSON.
 - `captain` : `true` pose l'étiquette « capitaine » à côté du pseudo. Sans guillemets.
-- `links` : les cinq réseaux du joueur. **Un réseau laissé vide n'apparaît pas du tout** —
-  aucun bouton grisé, aucune mention. Seuls les renseignés sont affichés.
+- `links` : les six réseaux. **Un réseau laissé vide n'apparaît pas du tout** —
+  aucun bouton grisé, aucune mention.
+
+Les deux images sont posées dans des cases carrées de taille fixe, donc tous les joueurs
+ont la même mise en page quelle que soit la taille des fichiers. Le personnage est mis à
+l'échelle sans être rogné ; la photo est recadrée pour remplir sa case.
+
+### Ajouter un joueur
+
+Copier un bloc joueur entier, changer son `id` pour une valeur qui n'existe pas encore,
+et remplir ce qu'on veut. Le reste peut rester vide. Le site n'attend aucun effectif
+précis : une équipe peut avoir zéro, trois ou douze membres, l'affichage s'adapte.
 
 ### Les images de personnages
 
