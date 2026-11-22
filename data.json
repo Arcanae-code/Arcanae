@@ -111,7 +111,7 @@
           "links": { "twitch": "https://www.twitch.tv/aspinow", "discord": "@aspinow", "instagram": "", "tiktok": "https://www.tiktok.com/@aspinow", "x": "https://x.com/_Aspin__", "youtube": "https://www.youtube.com/@AspinOW" }
         },
         {
-          "id": "p13", "pseudo": "Ketsueki21", "role": "En essai",
+          "id": "p13", "pseudo": "Ketsueki21", "role": "Flex Support",
           "main": "ana", "heroes": "Ana", "captain": false,
           "links": { "twitch": "https://www.twitch.tv/ketsueki_oxton", "discord": "", "instagram": "https://www.instagram.com/ketsueki_oxton/", "tiktok": "", "x": "", "youtube": "" }
         },
